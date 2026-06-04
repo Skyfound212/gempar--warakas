@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#1B5E20">
+<meta name="theme-color" content="#2D6A4F">
 <meta name="description" content="GEMPAR - Gerakan Memilah Sampah Dari Rumah. Pilah sampah, dapat GEM, banyak manfaat!">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,152 +14,484 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#1B5E20;--primary-dark:#0D3B10;--primary-light:#2E7D32;--accent:#FFCC00;--accent-dark:#E6B800;--bg:#F0F7F0;--card:#FFFFFF;--text:#1A1A1A;--text-light:#555555;--text-muted:#888888;--shadow:0 4px 20px rgba(27,94,32,0.12);--shadow-lg:0 8px 40px rgba(27,94,32,0.18)}
+:root{
+  --primary:#2D6A4F;
+  --primary-dark:#1B4332;
+  --primary-light:#40916C;
+  --primary-soft:#52B788;
+  --primary-mint:#D8F3DC;
+  --primary-pale:#E9F5EC;
+  --accent:#D4A574;
+  --accent-dark:#B8935F;
+  --accent-glow:rgba(212,165,116,0.3);
+  --bg:#F8FAF9;
+  --card:#FFFFFF;
+  --text:#1A1A1A;
+  --text-light:#4A4A4A;
+  --text-muted:#7A7A7A;
+  --border:rgba(45,106,79,0.08);
+  --shadow-sm:0 2px 8px rgba(45,106,79,0.06);
+  --shadow:0 4px 24px rgba(45,106,79,0.08);
+  --shadow-lg:0 12px 48px rgba(45,106,79,0.12);
+  --shadow-xl:0 20px 60px rgba(45,106,79,0.15);
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.header{position:fixed;top:0;left:0;right:0;height:70px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:1000;box-shadow:0 2px 20px rgba(27,94,32,0.3)}
-.header-logo{display:flex;align-items:center;gap:10px}
-.header-logo img{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))}
-.header-logo span{color:white;font-weight:800;font-size:22px;letter-spacing:1px;text-shadow:0 2px 4px rgba(0,0,0,0.2)}
-.header-tagline{color:rgba(255,255,255,0.85);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
-.hero{margin-top:70px;background:linear-gradient(135deg,var(--primary) 0%,#0D3B10 50%,var(--primary-light) 100%);padding:40px 20px 50px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,204,0,0.08) 0%,transparent 70%);border-radius:50%}
-.hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,0.03) 0%,transparent 70%);border-radius:50%}
-.hero-content{max-width:600px;margin:0 auto;position:relative;z-index:2}
-.hero-mascot{text-align:center;margin-bottom:20px}
-.hero-mascot img{width:160px;height:160px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hero-title{text-align:center;color:white}
-.hero-title h1{font-size:32px;font-weight:900;line-height:1.2;margin-bottom:8px;text-shadow:0 2px 10px rgba(0,0,0,0.3)}
-.hero-title h1 span{color:var(--accent)}
-.hero-title p{font-size:14px;color:rgba(255,255,255,0.85);font-weight:500}
-.quick-steps{background:var(--card);margin:-30px 16px 0;border-radius:20px;padding:24px 20px;box-shadow:var(--shadow-lg);position:relative;z-index:10}
-.quick-steps h2{text-align:center;color:var(--primary);font-size:16px;font-weight:700;margin-bottom:20px}
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.step-card{text-align:center;padding:16px 8px;border-radius:16px;background:linear-gradient(135deg,#F0F7F0 0%,#E8F5E9 100%);border:2px solid transparent;transition:all 0.3s ease}
-.step-card:hover{border-color:var(--primary);transform:translateY(-4px)}
-.step-icon{width:50px;height:50px;margin:0 auto 10px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 12px rgba(27,94,32,0.25)}
-.step-card h3{font-size:11px;font-weight:700;color:var(--primary);margin-bottom:4px}
-.step-card p{font-size:9px;color:var(--text-light);line-height:1.4}
-.section{padding:40px 16px;max-width:600px;margin:0 auto}
-.section-header{text-align:center;margin-bottom:28px}
-.section-header h2{font-size:22px;font-weight:800;color:var(--primary);margin-bottom:8px}
-.section-header p{font-size:13px;color:var(--text-light)}
-.section-badge{display:inline-block;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);color:var(--primary-dark);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px;box-shadow:0 2px 8px rgba(255,204,0,0.3)}
-.flow-container{display:flex;flex-direction:column;gap:16px}
-.flow-card{background:var(--card);border-radius:16px;padding:20px;display:flex;gap:16px;align-items:flex-start;box-shadow:var(--shadow);border-left:4px solid var(--primary);transition:all 0.3s ease}
-.flow-card:hover{transform:translateX(4px);box-shadow:var(--shadow-lg)}
-.flow-number{min-width:40px;height:40px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;box-shadow:0 4px 12px rgba(27,94,32,0.25)}
-.flow-content h3{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:6px}
-.flow-content p{font-size:12px;color:var(--text-light);line-height:1.6}
-.benefits-section{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);padding:40px 16px;position:relative;overflow:hidden}
-.benefits-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:0.5}
+
+/* ===== HEADER ===== */
+.header{position:fixed;top:0;left:0;right:0;height:68px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:1000;backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08)}
+.header-logo{display:flex;align-items:center;gap:12px}
+.header-logo img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15))}
+.header-logo span{color:white;font-weight:800;font-size:20px;letter-spacing:2px}
+.header-tagline{color:rgba(255,255,255,0.7);font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+
+/* ===== HERO ===== */
+.hero{margin-top:68px;position:relative;overflow:hidden;min-height:520px;display:flex;align-items:center;justify-content:center}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.45) saturate(1.2)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,53,41,0.3) 0%,rgba(29,53,41,0.7) 60%,rgba(29,53,41,0.9) 100%);z-index:1}
+.hero-pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");opacity:0.5;z-index:2}
+.hero-content{max-width:560px;margin:0 auto;padding:40px 24px;position:relative;z-index:3;text-align:center}
+.hero-mascot{text-align:center;margin-bottom:24px}
+.hero-mascot img{width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 12px 30px rgba(0,0,0,0.4));animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-8px) rotate(1deg)}75%{transform:translateY(-4px) rotate(-1deg)}}
+.hero-title h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1.15;margin-bottom:16px;color:white;text-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.hero-title h1 span{color:var(--accent);text-shadow:0 2px 10px rgba(212,165,116,0.4)}
+.hero-title p{font-size:15px;color:rgba(255,255,255,0.75);font-weight:400;max-width:380px;margin:0 auto;letter-spacing:0.3px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;border-radius:50px;margin-bottom:24px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:0.5px}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.3)}}
+
+/* ===== QUICK STEPS ===== */
+.quick-steps{background:var(--card);margin:-40px 20px 0;border-radius:24px;padding:32px 24px;box-shadow:var(--shadow-xl);position:relative;z-index:10;border:1px solid var(--border)}
+.quick-steps h2{text-align:center;color:var(--primary-dark);font-size:15px;font-weight:700;margin-bottom:28px;letter-spacing:0.5px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step-card{text-align:center;padding:20px 10px;border-radius:20px;background:linear-gradient(145deg,var(--primary-pale) 0%,var(--primary-mint) 100%);border:1px solid var(--border);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.step-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--primary-soft));transform:scaleX(0);transition:transform 0.4s ease}
+.step-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--primary-soft)}
+.step-card:hover::before{transform:scaleX(1)}
+.step-icon{width:52px;height:52px;margin:0 auto 12px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 20px rgba(45,106,79,0.25);transition:transform 0.3s ease}
+.step-card:hover .step-icon{transform:scale(1.1) rotate(-5deg)}
+.step-card h3{font-size:11px;font-weight:700;color:var(--primary-dark);margin-bottom:4px;letter-spacing:0.3px}
+.step-card p{font-size:9px;color:var(--text-muted);line-height:1.4;font-weight:500}
+
+/* ===== SECTIONS ===== */
+.section{padding:48px 20px;max-width:640px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:32px}
+.section-header h2{font-size:24px;font-weight:800;color:var(--primary-dark);margin-bottom:10px;letter-spacing:-0.3px}
+.section-header p{font-size:13px;color:var(--text-muted);max-width:400px;margin:0 auto;line-height:1.6}
+.section-badge{display:inline-block;background:linear-gradient(135deg,var(--primary-mint) 0%,var(--primary-pale) 100%);color:var(--primary-dark);padding:8px 20px;border-radius:50px;font-size:11px;font-weight:700;margin-bottom:16px;letter-spacing:0.5px;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+
+/* ===== FLOW ===== */
+.flow-container{display:flex;flex-direction:column;gap:14px}
+.flow-card{background:var(--card);border-radius:20px;padding:22px;display:flex;gap:18px;align-items:flex-start;box-shadow:var(--shadow);border:1px solid var(--border);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.flow-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:20px 0 0 20px;opacity:0.8}
+.flow-card:hover{transform:translateX(6px);box-shadow:var(--shadow-lg);border-color:var(--primary-soft)}
+.flow-number{min-width:44px;height:44px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:white;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0;box-shadow:0 4px 16px rgba(45,106,79,0.2)}
+.flow-content h3{font-size:15px;font-weight:700;color:var(--primary-dark);margin-bottom:6px;letter-spacing:-0.2px}
+.flow-content p{font-size:12px;color:var(--text-muted);line-height:1.7}
+
+/* ===== BENEFITS ===== */
+.benefits-section{background:linear-gradient(165deg,var(--primary-dark) 0%,var(--primary) 40%,var(--primary-light) 100%);padding:48px 20px;position:relative;overflow:hidden}
+.benefits-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:0.6}
 .benefits-section .section-header h2{color:white}
-.benefits-section .section-header p{color:rgba(255,255,255,0.8)}
+.benefits-section .section-header p{color:rgba(255,255,255,0.65)}
+.benefits-section .section-badge{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.15)}
 .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:600px;margin:0 auto;position:relative;z-index:2}
-.benefit-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:16px;padding:20px 14px;text-align:center;border:1px solid rgba(255,255,255,0.15);transition:all 0.3s ease}
-.benefit-card:hover{background:rgba(255,255,255,0.15);transform:translateY(-4px)}
-.benefit-icon{width:50px;height:50px;margin:0 auto 12px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(255,204,0,0.3)}
-.benefit-card h3{font-size:13px;font-weight:700;color:white;margin-bottom:6px}
-.benefit-card p{font-size:10px;color:rgba(255,255,255,0.75);line-height:1.5}
-.gem-info{background:linear-gradient(135deg,#FFF8E1 0%,#FFECB3 100%);border-radius:16px;padding:20px;margin:24px 16px 0;display:flex;align-items:center;gap:16px;border:2px solid var(--accent);max-width:600px;margin-left:auto;margin-right:auto}
-.gem-info-icon{font-size:40px;flex-shrink:0}
-.gem-info-text h3{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:4px}
-.gem-info-text p{font-size:12px;color:var(--text-light);line-height:1.5}
-.cta-section{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%);padding:40px 16px;text-align:center;position:relative;overflow:hidden}
-.cta-section::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(255,204,0,0.1) 0%,transparent 70%);border-radius:50%}
+.benefit-card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border-radius:20px;padding:24px 16px;text-align:center;border:1px solid rgba(255,255,255,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
+.benefit-card:hover{background:rgba(255,255,255,0.12);transform:translateY(-6px);border-color:rgba(255,255,255,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.15)}
+.benefit-icon{width:52px;height:52px;margin:0 auto 14px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 6px 20px rgba(212,165,116,0.3);transition:transform 0.3s ease}
+.benefit-card:hover .benefit-icon{transform:scale(1.15) rotate(5deg)}
+.benefit-card h3{font-size:13px;font-weight:700;color:white;margin-bottom:8px;letter-spacing:0.3px}
+.benefit-card p{font-size:10px;color:rgba(255,255,255,0.65);line-height:1.6}
+
+/* ===== GEM INFO ===== */
+.gem-info{background:linear-gradient(145deg,#FFF9F0 0%,#FDF3E3 100%);border-radius:20px;padding:24px;margin:28px 20px 0;display:flex;align-items:center;gap:18px;border:1px solid rgba(212,165,116,0.2);max-width:600px;margin-left:auto;margin-right:auto;box-shadow:var(--shadow)}
+.gem-info-icon{font-size:42px;flex-shrink:0;filter:drop-shadow(0 4px 8px rgba(212,165,116,0.3))}
+.gem-info-text h3{font-size:15px;font-weight:700;color:var(--primary-dark);margin-bottom:6px;letter-spacing:-0.2px}
+.gem-info-text p{font-size:12px;color:var(--text-muted);line-height:1.7}
+
+/* ===== CTA ===== */
+.cta-section{background:linear-gradient(165deg,var(--primary-dark) 0%,var(--primary) 50%,var(--primary-light) 100%);padding:56px 20px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,165,116,0.08) 0%,transparent 70%);border-radius:50%}
 .cta-content{position:relative;z-index:2;max-width:500px;margin:0 auto}
-.cta-mascot{width:140px;height:140px;margin:0 auto 20px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));animation:float 3s ease-in-out infinite}
-.cta-section h2{color:white;font-size:24px;font-weight:800;margin-bottom:8px}
-.cta-section p{color:rgba(255,255,255,0.85);font-size:14px;margin-bottom:24px}
-.cta-button{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);color:var(--primary-dark);padding:16px 32px;border-radius:50px;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 6px 20px rgba(255,204,0,0.4);transition:all 0.3s ease;border:none;cursor:pointer}
-.cta-button:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,204,0,0.5)}
+.cta-mascot{width:130px;height:130px;margin:0 auto 24px;object-fit:contain;filter:drop-shadow(0 12px 30px rgba(0,0,0,0.35));animation:float 4s ease-in-out infinite}
+.cta-section h2{color:white;font-size:26px;font-weight:800;margin-bottom:10px;font-family:'Playfair Display',serif;letter-spacing:-0.5px}
+.cta-section p{color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:28px;line-height:1.7;max-width:380px;margin-left:auto;margin-right:auto}
+.cta-button{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);color:var(--primary-dark);padding:18px 36px;border-radius:50px;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 8px 30px var(--accent-glow);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);border:none;cursor:pointer;letter-spacing:0.3px}
+.cta-button:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(212,165,116,0.4)}
+.cta-button:active{transform:translateY(-1px)}
 .cta-button svg{width:20px;height:20px}
-.cta-note{margin-top:16px;font-size:12px;color:rgba(255,255,255,0.6)}
-.footer-features{background:var(--card);padding:30px 16px}
-.features-row{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;max-width:600px;margin:0 auto}
-.feature-item{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--primary)}
-.feature-item span{font-size:18px}
-.footer{background:var(--primary-dark);padding:24px 16px;text-align:center}
-.footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
-.footer-logo img{width:36px;height:36px}
-.footer-logo span{color:white;font-weight:800;font-size:20px}
-.footer p{color:rgba(255,255,255,0.6);font-size:11px;line-height:1.6}
-.footer-slogan{color:var(--accent)!important;font-weight:600;margin-top:8px}
-.fab{position:fixed;bottom:24px;right:24px;width:64px;height:64px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(27,94,32,0.4);z-index:999;cursor:pointer;transition:all 0.3s ease;border:3px solid white;text-decoration:none;overflow:hidden}
-.fab:hover{transform:scale(1.1) rotate(5deg);box-shadow:0 8px 30px rgba(27,94,32,0.5)}
-.fab:active{transform:scale(0.95)}
-.fab img{width:44px;height:44px;object-fit:contain}
-.fab-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(27,94,32,0.3);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.6);opacity:0}}
-.poster-section{padding:30px 16px;background:var(--bg)}
-.poster-container{max-width:500px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);border:4px solid white}
+.cta-note{margin-top:20px;font-size:12px;color:rgba(255,255,255,0.45);font-weight:400}
+
+/* ===== FOOTER FEATURES ===== */
+.footer-features{background:var(--card);padding:32px 20px;border-top:1px solid var(--border)}
+.features-row{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;max-width:640px;margin:0 auto}
+.feature-item{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--primary);background:var(--primary-pale);padding:8px 16px;border-radius:50px;border:1px solid var(--border);transition:all 0.3s ease}
+.feature-item:hover{background:var(--primary-mint);transform:translateY(-2px)}
+.feature-item span{font-size:16px}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--primary-dark);padding:32px 20px;text-align:center;position:relative;overflow:hidden}
+.footer::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:0.5}
+.footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;position:relative;z-index:2}
+.footer-logo img{width:36px;height:36px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.2))}
+.footer-logo span{color:white;font-weight:800;font-size:20px;letter-spacing:2px}
+.footer p{color:rgba(255,255,255,0.5);font-size:11px;line-height:1.7;position:relative;z-index:2}
+.footer-slogan{color:var(--accent)!important;font-weight:600;margin-top:8px;font-size:13px!important}
+.footer-copyright{margin-top:16px;font-size:10px!important;color:rgba(255,255,255,0.35)!important}
+
+/* ===== POSTER ===== */
+.poster-section{padding:40px 20px;background:var(--bg)}
+.poster-container{max-width:500px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-xl);border:4px solid white;transition:all 0.4s ease}
+.poster-container:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl)}
 .poster-container img{width:100%;height:auto;display:block}
-.reveal{opacity:0;transform:translateY(30px);transition:all 0.6s ease}
-.reveal.active{opacity:1;transform:translateY(0)}
-.install-banner{position:fixed;bottom:100px;left:16px;right:16px;background:var(--card);border-radius:16px;padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-lg);z-index:998;transform:translateY(150%);transition:transform 0.4s ease}
+
+/* ===== FAB (2X SIZE) ===== */
+.fab-wrapper{position:fixed;bottom:28px;right:24px;z-index:999;display:flex;flex-direction:column;align-items:center;gap:10px;animation:fab-enter 0.6s cubic-bezier(0.34,1.56,0.64,1) 1.5s both}
+@keyframes fab-enter{from{transform:translateY(40px) scale(0.8);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.fab-label{background:var(--card);color:var(--primary-dark);font-size:12px;font-weight:700;padding:8px 18px;border-radius:12px;box-shadow:var(--shadow-lg);border:1px solid var(--border);white-space:nowrap;animation:label-bounce 2s ease-in-out infinite;position:relative}
+.fab-label::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid var(--card)}
+@keyframes label-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.fab{width:128px;height:128px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 40px rgba(45,106,79,0.35);cursor:pointer;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);border:4px solid white;text-decoration:none;overflow:hidden;position:relative}
+.fab:hover{transform:scale(1.08) rotate(3deg);box-shadow:0 12px 48px rgba(45,106,79,0.45)}
+.fab:active{transform:scale(0.95)}
+.fab img{width:88px;height:88px;object-fit:contain;position:relative;z-index:2}
+.fab-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(45,106,79,0.2);animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
+
+/* ===== INSTALL BANNER ===== */
+.install-banner{position:fixed;bottom:170px;left:16px;right:16px;background:var(--card);border-radius:20px;padding:18px 22px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-xl);z-index:998;transform:translateY(150%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);border:1px solid var(--border)}
 .install-banner.show{transform:translateY(0)}
-.install-banner img{width:44px;height:44px;border-radius:10px}
+.install-banner img{width:48px;height:48px;border-radius:12px;box-shadow:var(--shadow-sm)}
 .install-banner-text{flex:1}
-.install-banner-text h4{font-size:14px;font-weight:700;color:var(--text)}
-.install-banner-text p{font-size:11px;color:var(--text-light)}
-.install-banner-btn{background:var(--primary);color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap}
-.install-banner-close{background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;padding:4px}
-@media(min-width:768px){.hero-title h1{font-size:42px}.steps-grid{grid-template-columns:repeat(3,1fr);gap:20px}.benefits-grid{grid-template-columns:repeat(4,1fr)}.flow-card{padding:24px}}
-@media(max-width:400px){.steps-grid{grid-template-columns:1fr}.benefits-grid{grid-template-columns:1fr}.hero-title h1{font-size:26px}}
-.page-loader{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--primary);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.5s ease,visibility 0.5s ease}
+.install-banner-text h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
+.install-banner-text p{font-size:12px;color:var(--text-muted)}
+.install-banner-btn{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:white;border:none;padding:10px 20px;border-radius:50px;font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-sm);transition:all 0.3s ease}
+.install-banner-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.install-banner-close{background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer;padding:4px;transition:color 0.3s ease}
+.install-banner-close:hover{color:var(--text)}
+
+/* ===== PAGE LOADER ===== */
+.page-loader{position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.6s ease,visibility 0.6s ease}
 .page-loader.hidden{opacity:0;visibility:hidden}
-.page-loader img{width:120px;height:120px;object-fit:contain;animation:bounce 1s ease-in-out infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-.page-loader p{color:white;margin-top:16px;font-weight:600;font-size:14px}
-.loader-bar{width:120px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin-top:12px;overflow:hidden}
-.loader-bar-fill{height:100%;background:var(--accent);border-radius:2px;animation:load 1.5s ease-in-out infinite}
+.page-loader img{width:100px;height:100px;object-fit:contain;animation:bounce 1.2s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3))}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.page-loader p{color:white;margin-top:20px;font-weight:600;font-size:14px;letter-spacing:0.5px}
+.loader-bar{width:120px;height:3px;background:rgba(255,255,255,0.15);border-radius:2px;margin-top:14px;overflow:hidden}
+.loader-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-dark));border-radius:2px;animation:load 1.8s ease-in-out infinite}
 @keyframes load{0%{width:0%;margin-left:0}50%{width:100%;margin-left:0}100%{width:0%;margin-left:100%}}
+
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.7s cubic-bezier(0.4,0,0.2,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(min-width:768px){
+  .hero-title h1{font-size:44px}
+  .steps-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+  .benefits-grid{grid-template-columns:repeat(4,1fr)}
+  .flow-card{padding:26px}
+  .hero{min-height:600px}
+}
+@media(max-width:400px){
+  .steps-grid{grid-template-columns:1fr}
+  .benefits-grid{grid-template-columns:1fr}
+  .hero-title h1{font-size:28px}
+  .fab{width:100px;height:100px}
+  .fab img{width:68px;height:68px}
+  .fab-label{font-size:11px;padding:6px 14px}
+}
 </style>
 </head>
 <body>
-<div class="page-loader" id="pageLoader"><img src="images/logogempar.png" alt="GEMPAR Logo"><p>Memuat GEMPAR...</p><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
-<header class="header"><div class="header-logo"><img src="images/logogempar.png" alt="GEMPAR"><div><span>GEMPAR</span><div class="header-tagline">Gerakan Memilah Sampah</div></div></div></header>
-<section class="hero"><div class="hero-content"><div class="hero-mascot"><img src="images/mascot-cool.png" alt="Maskot GEMPAR"></div><div class="hero-title"><h1>PILAH SAMPAH<br>DARI RUMAH,<br><span>DAPAT GEM,</span><br>BANYAK MANFAAT!</h1><p>Gerakan Memilah Sampah Dari Rumah</p></div></div></section>
-<div class="quick-steps reveal"><h2>🌿 Cara Gampang Ikut GEMPAR</h2><div class="steps-grid"><div class="step-card"><div class="step-icon">♻️</div><h3>PILAH SAMPAH</h3><p>Dari Rumah</p></div><div class="step-card"><div class="step-icon">🪙</div><h3>DAPAT KOIN GEM</h3><p>Setiap Setoran</p></div><div class="step-card"><div class="step-icon">🎁</div><h3>TUKAR DENGAN</h3><p>Berbagai Reward</p></div></div></div>
-<div class="gem-info reveal"><div class="gem-info-icon">🪙</div><div class="gem-info-text"><h3>GEM adalah koin kebaikan</h3><p>untuk lingkungan dan masa depan kita. Setiap setoran sampah yang kamu lakukan akan dikonversi menjadi koin GEM yang bisa ditukar dengan berbagai reward menarik!</p></div></div>
-<section class="section"><div class="section-header reveal"><div class="section-badge">📋 FLOW KEGIATAN SETOR</div><h2>8 Langkah Mudah Setor Sampah</h2><p>Ikuti alur kegiatan setor sampah berikut untuk mulai berkontribusi</p></div>
-<div class="flow-container">
-<div class="flow-card reveal"><div class="flow-number">1</div><div class="flow-content"><h3>PILAH SAMPAH</h3><p>Pisahkan sampah di rumah sesuai jenisnya: organik, anorganik, dan residu.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">2</div><div class="flow-content"><h3>SIAPKAN SETORAN</h3><p>Kumpulkan sampah yang sudah dipilah. Pastikan bersih, kering, dan tidak tercampur.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">3</div><div class="flow-content"><h3>BUKA MENU SETOR</h3><p>Buka aplikasi GEMPAR, pilih menu Setor, lalu klik Mulai Setor.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">4</div><div class="flow-content"><h3>PILIH LOKASI & JADWAL</h3><p>Pilih lokasi tempat setor terdekat dan pilih jadwal setor yang tersedia.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">5</div><div class="flow-content"><h3>KIRIM SETORAN</h3><p>Bawa sampah ke lokasi setor. Petugas menimbang dan memverifikasi setoran.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">6</div><div class="flow-content"><h3>VERIFIKASI & KONFIRMASI</h3><p>Petugas mengonfirmasi jenis dan berat sampah di aplikasi. Setoran berhasil diverifikasi.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">7</div><div class="flow-content"><h3>DAPAT GEM</h3><p>GEM otomatis masuk ke akunmu sesuai berat dan jenis sampah.</p></div></div>
-<div class="flow-card reveal"><div class="flow-number">8</div><div class="flow-content"><h3>LIHAT HASIL & RIWAYAT</h3><p>Cek detail setoran dan GEM yang kamu dapat di menu Riwayat.</p></div></div>
-</div></section>
-<section class="benefits-section"><div class="section-header reveal"><div class="section-badge">✨ KENAPA GABUNG GEMPAR?</div><h2>Manfaat Bergabung Bersama Kami</h2><p>Berikut alasan mengapa kamu harus ikut GEMPAR sekarang juga</p></div>
-<div class="benefits-grid">
-<div class="benefit-card reveal"><div class="benefit-icon">✅</div><h3>MUDAH</h3><p>Setor sampah dari rumah, praktis dan simpel.</p></div>
-<div class="benefit-card reveal"><div class="benefit-icon">🪙</div><h3>DAPAT GEM</h3><p>Setiap setoran, kamu dapat koin GEM yang bermanfaat.</p></div>
-<div class="benefit-card reveal"><div class="benefit-icon">🌍</div><h3>BERDAMPAK</h3><p>Bantu kurangi sampah, jaga lingkungan, jaga bumi kita.</p></div>
-<div class="benefit-card reveal"><div class="benefit-icon">🎁</div><h3>REWARD MENARIK</h3><p>Tukar GEM dengan berbagai reward menarik!</p></div>
-</div></section>
-<section class="poster-section"><div class="section-header reveal"><div class="section-badge">📱 POSTER INFORMATIF</div><h2>Infografis Lengkap GEMPAR</h2><p>Lihat poster lengkap tentang cara bergabung dan flow kegiatan setor</p></div><div class="poster-container reveal"><img src="images/poster.png" alt="Poster GEMPAR"></div></section>
-<section class="cta-section"><div class="cta-content"><img src="images/mascot-reward.png" alt="Maskot GEMPAR Reward" class="cta-mascot"><h2>Download GEMPAR Sekarang!</h2><p>Yuk, mulai dari rumah, dari kita, untuk semua.<br>Gabung sekarang, lingkungan lebih bersih, hidup lebih sehat!</p><a href="https://gempar-warakasv2.base44.app" class="cta-button" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>Buka Aplikasi GEMPAR</a><p class="cta-note">GEMPAR.APP (PWA - Tanpa Install)</p></div></section>
-<div class="footer-features"><div class="features-row"><div class="feature-item"><span>♻️</span><span>Pilah Sampah Dari Rumah</span></div><div class="feature-item"><span>🗑️</span><span>Kumpulkan Sampah</span></div><div class="feature-item"><span>🪙</span><span>Dapat GEM</span></div><div class="feature-item"><span>🎁</span><span>Tukar Reward Menarik</span></div><div class="feature-item"><span>👥</span><span>Bangun Komunitas Lebih Bersih</span></div><div class="feature-item"><span>🌍</span><span>Selamatkan Bumi Kita</span></div></div></div>
-<footer class="footer"><div class="footer-logo"><img src="images/logogempar.png" alt="GEMPAR"><span>GEMPAR</span></div><p>Gerakan Memilah Sampah Dari Rumah</p><p class="footer-slogan">Yuk, mulai dari rumah, dari kita, untuk semua.</p><p style="margin-top:12px;font-size:10px">© 2024 GEMPAR. All rights reserved.</p></footer>
-<a href="https://gempar-warakas.base44.app" class="fab" target="_blank" rel="noopener" aria-label="Buka Aplikasi GEMPAR"><div class="fab-pulse"></div><img src="images/logogempar.png" alt="GEMPAR"></a>
-<div class="install-banner" id="installBanner"><img src="images/logogempar.png" alt="GEMPAR"><div class="install-banner-text"><h4>Install GEMPAR</h4><p>Tambahkan ke layar utama untuk akses cepat</p></div><button class="install-banner-btn" id="installBtn">Install</button><button class="install-banner-close" id="closeBanner">×</button></div>
+
+<!-- Page Loader -->
+<div class="page-loader" id="pageLoader">
+  <img src="images/logogempar.png" alt="GEMPAR Logo">
+  <p>Memuat GEMPAR...</p>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-logo">
+    <img src="images/logogempar.png" alt="GEMPAR">
+    <div>
+      <span>GEMPAR</span>
+      <div class="header-tagline">Gerakan Memilah Sampah</div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1200&q=80" alt="Green Nature Background">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Gerakan Memilah Sampah Dari Rumah</div>
+    <div class="hero-mascot">
+      <img src="images/mascot-cool.png" alt="Maskot GEMPAR">
+    </div>
+    <div class="hero-title">
+      <h1>PILAH SAMPAH<br>DARI RUMAH,<br><span>DAPAT GEM,</span><br>BANYAK MANFAAT!</h1>
+      <p>Gabung bersama ribuan keluarga yang peduli lingkungan dan raih reward menarik setiap harinya</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Steps -->
+<div class="quick-steps reveal">
+  <h2>🌿 Cara Gampang Ikut GEMPAR</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-icon">♻️</div>
+      <h3>PILAH SAMPAH</h3>
+      <p>Dari Rumah</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🪙</div>
+      <h3>DAPAT KOIN GEM</h3>
+      <p>Setiap Setoran</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🎁</div>
+      <h3>TUKAR DENGAN</h3>
+      <p>Berbagai Reward</p>
+    </div>
+  </div>
+</div>
+
+<!-- GEM Info -->
+<div class="gem-info reveal">
+  <div class="gem-info-icon">🪙</div>
+  <div class="gem-info-text">
+    <h3>GEM adalah koin kebaikan</h3>
+    <p>untuk lingkungan dan masa depan kita. Setiap setoran sampah yang kamu lakukan akan dikonversi menjadi koin GEM yang bisa ditukar dengan berbagai reward menarik!</p>
+  </div>
+</div>
+
+<!-- Flow Section -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-badge">📋 FLOW KEGIATAN SETOR</div>
+    <h2>8 Langkah Mudah Setor Sampah</h2>
+    <p>Ikuti alur kegiatan setor sampah berikut untuk mulai berkontribusi</p>
+  </div>
+  <div class="flow-container">
+    <div class="flow-card reveal">
+      <div class="flow-number">1</div>
+      <div class="flow-content">
+        <h3>PILAH SAMPAH</h3>
+        <p>Pisahkan sampah di rumah sesuai jenisnya: organik, anorganik, dan residu.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">2</div>
+      <div class="flow-content">
+        <h3>SIAPKAN SETORAN</h3>
+        <p>Kumpulkan sampah yang sudah dipilah. Pastikan bersih, kering, dan tidak tercampur.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">3</div>
+      <div class="flow-content">
+        <h3>BUKA MENU SETOR</h3>
+        <p>Buka aplikasi GEMPAR, pilih menu Setor, lalu klik Mulai Setor.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">4</div>
+      <div class="flow-content">
+        <h3>PILIH LOKASI & JADWAL</h3>
+        <p>Pilih lokasi tempat setor terdekat dan pilih jadwal setor yang tersedia.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">5</div>
+      <div class="flow-content">
+        <h3>KIRIM SETORAN</h3>
+        <p>Bawa sampah ke lokasi setor. Petugas menimbang dan memverifikasi setoran.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">6</div>
+      <div class="flow-content">
+        <h3>VERIFIKASI & KONFIRMASI</h3>
+        <p>Petugas mengonfirmasi jenis dan berat sampah di aplikasi. Setoran berhasil diverifikasi.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">7</div>
+      <div class="flow-content">
+        <h3>DAPAT GEM</h3>
+        <p>GEM otomatis masuk ke akunmu sesuai berat dan jenis sampah.</p>
+      </div>
+    </div>
+    <div class="flow-card reveal">
+      <div class="flow-number">8</div>
+      <div class="flow-content">
+        <h3>LIHAT HASIL & RIWAYAT</h3>
+        <p>Cek detail setoran dan GEM yang kamu dapat di menu Riwayat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="benefits-section">
+  <div class="section-header reveal">
+    <div class="section-badge">✨ KENAPA GABUNG GEMPAR?</div>
+    <h2>Manfaat Bergabung Bersama Kami</h2>
+    <p>Berikut alasan mengapa kamu harus ikut GEMPAR sekarang juga</p>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card reveal">
+      <div class="benefit-icon">✅</div>
+      <h3>MUDAH</h3>
+      <p>Setor sampah dari rumah, praktis dan simpel.</p>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon">🪙</div>
+      <h3>DAPAT GEM</h3>
+      <p>Setiap setoran, kamu dapat koin GEM yang bermanfaat.</p>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon">🌍</div>
+      <h3>BERDAMPAK</h3>
+      <p>Bantu kurangi sampah, jaga lingkungan, jaga bumi kita.</p>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon">🎁</div>
+      <h3>REWARD MENARIK</h3>
+      <p>Tukar GEM dengan berbagai reward menarik!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Poster Section -->
+<section class="poster-section">
+  <div class="section-header reveal">
+    <div class="section-badge">📱 POSTER INFORMATIF</div>
+    <h2>Infografis Lengkap GEMPAR</h2>
+    <p>Lihat poster lengkap tentang cara bergabung dan flow kegiatan setor</p>
+  </div>
+  <div class="poster-container reveal">
+    <img src="images/poster.png" alt="Poster GEMPAR">
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="cta-content">
+    <img src="images/mascot-reward.png" alt="Maskot GEMPAR Reward" class="cta-mascot">
+    <h2>Download GEMPAR Sekarang!</h2>
+    <p>Yuk, mulai dari rumah, dari kita, untuk semua.<br>Gabung sekarang, lingkungan lebih bersih, hidup lebih sehat!</p>
+    <a href="https://gemparwarakas-v2.base44.app" class="cta-button" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+      </svg>
+      Buka Aplikasi GEMPAR
+    </a>
+    <p class="cta-note">GEMPAR.APP (PWA - Tanpa Install)</p>
+  </div>
+</section>
+
+<!-- Footer Features -->
+<div class="footer-features">
+  <div class="features-row">
+    <div class="feature-item"><span>♻️</span><span>Pilah Sampah Dari Rumah</span></div>
+    <div class="feature-item"><span>🗑️</span><span>Kumpulkan Sampah</span></div>
+    <div class="feature-item"><span>🪙</span><span>Dapat GEM</span></div>
+    <div class="feature-item"><span>🎁</span><span>Tukar Reward Menarik</span></div>
+    <div class="feature-item"><span>👥</span><span>Bangun Komunitas Lebih Bersih</span></div>
+    <div class="feature-item"><span>🌍</span><span>Selamatkan Bumi Kita</span></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="images/logogempar.png" alt="GEMPAR">
+    <span>GEMPAR</span>
+  </div>
+  <p>Gerakan Memilah Sampah Dari Rumah</p>
+  <p class="footer-slogan">Yuk, mulai dari rumah, dari kita, untuk semua.</p>
+  <p class="footer-copyright">© 2024 GEMPAR. All rights reserved.</p>
+</footer>
+
+<!-- FAB (2X Size with Label) -->
+<div class="fab-wrapper">
+  <div class="fab-label">Klik Disini</div>
+  <a href="https://gemparwarakas-v2.base44.app" class="fab" target="_blank" rel="noopener" aria-label="Buka Aplikasi GEMPAR">
+    <div class="fab-pulse"></div>
+    <img src="images/logogempar.png" alt="GEMPAR">
+  </a>
+</div>
+
+<button class="install-banner-btn" id="installBtn">Install</button>
+  <button class="install-banner-close" id="closeBanner">&times;</button>
+</div>
+
 <script>
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('pageLoader').classList.add('hidden')},1500)});
+// Page Loader
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('pageLoader').classList.add('hidden')
+  },1800)
+});
+
+// Scroll Reveal
 const revealElements=document.querySelectorAll('.reveal');
-const revealObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('active')}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('active')
+    }
+  })
+},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
 revealElements.forEach(el=>revealObserver.observe(el));
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(reg=>console.log('SW registered')).catch(err=>console.log('SW failed'))}
-let deferredPrompt;const installBanner=document.getElementById('installBanner');const installBtn=document.getElementById('installBtn');const closeBanner=document.getElementById('closeBanner');
-window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredPrompt=e;setTimeout(()=>{installBanner.classList.add('show')},3000)});
-installBtn.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted'){installBanner.classList.remove('show')}deferredPrompt=null}});
-closeBanner.addEventListener('click',()=>{installBanner.classList.remove('show')});
+
+// Service Worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(reg=>console.log('SW registered')).catch(err=>console.log('SW failed'))
+}
+
+// Install Banner
+let deferredPrompt;
+const installBanner=document.getElementById('installBanner');
+const installBtn=document.getElementById('installBtn');
+const closeBanner=document.getElementById('closeBanner');
+
+window.addEventListener('beforeinstallprompt',(e)=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  setTimeout(()=>{
+    installBanner.classList.add('show')
+  },4000)
+});
+
+installBtn.addEventListener('click',async()=>{
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    const{outcome}=await deferredPrompt.userChoice;
+    if(outcome==='accepted'){
+      installBanner.classList.remove('show')
+    }
+    deferredPrompt=null
+  }
+});
+
+closeBanner.addEventListener('click',()=>{
+  installBanner.classList.remove('show')
+});
 </script>
+
 </body>
 </html>
