@@ -349,6 +349,29 @@ body{font-family:'Plus Jakarta Sans','DM Sans',-apple-system,sans-serif;backgrou
 .fab-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(45,106,79,0.2);animation:pulse 2.5s ease-in-out infinite}
 @keyframes pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
 
+
+/* ===== LEFT FAB (Chat SiGEMPAR) ===== */
+.left-fab-wrapper{position:fixed;bottom:28px;left:24px;z-index:998;display:flex;flex-direction:column;align-items:center;gap:10px;animation:left-fab-enter 0.7s cubic-bezier(0.34,1.56,0.64,1) 2.5s both}
+@keyframes left-fab-enter{from{transform:translateY(50px) scale(0.7);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.left-fab-label{background:var(--card);color:var(--primary-dark);font-size:11px;font-weight:700;padding:8px 14px;border-radius:12px;box-shadow:var(--shadow-lg);border:1px solid var(--border);white-space:nowrap;animation:left-label-bounce 2.5s ease-in-out infinite;position:relative}
+.left-fab-label::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid var(--card)}
+@keyframes left-label-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.left-fab{width:72px;height:72px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(45,106,79,0.35);cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);border:3px solid white;text-decoration:none;overflow:hidden;position:relative}
+.left-fab:hover{transform:scale(1.15) rotate(-5deg);box-shadow:0 12px 40px rgba(45,106,79,0.45)}
+.left-fab:active{transform:scale(0.95)}
+.left-fab img{width:52px;height:52px;object-fit:contain;position:relative;z-index:2;border-radius:50%}
+.left-fab-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(45,106,79,0.2);animation:left-pulse 2.5s ease-in-out infinite}
+@keyframes left-pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.left-fab-shake{animation:left-fab-shake 3s ease-in-out infinite}
+@keyframes left-fab-shake{0%,100%{transform:rotate(0deg)}2%{transform:rotate(5deg)}4%{transform:rotate(-5deg)}6%{transform:rotate(5deg)}8%{transform:rotate(-5deg)}10%{transform:rotate(0deg)}}
+.left-fab:hover .left-fab-shake{animation-play-state:paused}
+
+@media(max-width:400px){
+  .left-fab{width:60px;height:60px}
+  .left-fab img{width:42px;height:42px}
+  .left-fab-label{font-size:10px;padding:6px 12px}
+}
+
 /* ===== PAGE LOADER ===== */
 .page-loader{position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.6s ease,visibility 0.6s ease}
 .page-loader.hidden{opacity:0;visibility:hidden}
@@ -644,6 +667,15 @@ body{font-family:'Plus Jakarta Sans','DM Sans',-apple-system,sans-serif;backgrou
   <p class="footer-slogan">Yuk, mulai dari rumah, dari kita, untuk semua.</p>
   <p class="footer-copyright">© 2024 GEMPAR. All rights reserved.</p>
 </footer>
+
+<!-- Left FAB (Chat SiGEMPAR) -->
+<div class="left-fab-wrapper">
+  <div class="left-fab-label">Chat SiGEMPAR</div>
+  <a href="https://gempar212.base44.app" class="left-fab left-fab-shake" target="_blank" rel="noopener" aria-label="Chat SiGEMPAR">
+    <div class="left-fab-pulse"></div>
+    <img src="images/chat-sigempar-icon.png" alt="Chat SiGEMPAR">
+  </a>
+</div>
 
 <!-- FAB (2X Size with Label) -->
 <div class="fab-wrapper">
