@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1B5E20">
+<meta name="description" content="GEMPAR - Gerakan Memilah Sampah Dari Rumah. Pilah sampah, dapat GEM, banyak manfaat!">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GEMPAR">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="GEMPAR">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GEMPAR">
+<meta property="og:title" content="GEMPAR - Gerakan Memilah Sampah Dari Rumah">
+<meta property="og:description" content="Gabung GEMPAR sekarang! Pilah sampah dari rumah, bawa ke Drop Point, tunjukkan QR ke PDP, dan koin GEM otomatis masuk ke saldo.">
+<meta property="og:image" content="images/poster.png">
+<meta property="og:locale" content="id_ID">
+
+<title>GEMPAR - Gerakan Memilah Sampah Dari Rumah</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- ============================================ -->
+<!-- PRELOADER - Hilangkan flash hijau & error    -->
+<!-- ============================================ -->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  #preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1B5E20 0%, #2D6A4F 100%);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  #preloader img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    animation: preloader-pulse 1.5s ease-in-out infinite;
+  }
+  #preloader p {
+    color: white;
+    margin-top: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  @keyframes preloader-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+</style>
+
+<!-- Block request ke domain lama -->
+<script>
+(function() {
+  var blocked = ['gempa-waraka.com', 'www.gempa-waraka.com', 'gempar-waraka.com'];
+  var origFetch = window.fetch;
+  window.fetch = function(url, opts) {
+    if (typeof url === 'string') {
+      for (var i = 0; i < blocked.length; i++) {
+        if (url.indexOf(blocked[i]) !== -1) {
+          console.warn('[BLOCKED]', url);
+          return Promise.reject(new Error('Domain tidak aktif'));
+        }
+      }
+    }
+    return origFetch.apply(this, arguments);
+  };
+})();
+</script>
+
+<style>
+:root {
+  --primary: #2D6A4F;
+  --primary-dark: #1B4332;
+  --primary-light: #40916C;
+  --primary-soft: #52B788;
+  --primary-mint: #D8F3DC;
+  --primary-pale: #E9F5EC;
+  --accent: #D4A574;
+  --accent-dark: #B8935F;
+  --bg: #F5F7F6;
+  --card: #FFFFFF;
+  --text: #1A1A1A;
+  --text-light: #4A4A4A;
+  --text-muted: #8A8A8A;
+  --border: rgba(45,106,79,0.06);
+  --shadow-sm: 0 2px 8px rgba(45,106,79,0.05);
+  --shadow: 0 8px 32px rgba(45,106,79,0.08);
+  --shadow-lg: 0 16px 48px rgba(45,106,79,0.12);
+  --shadow-xl: 0 24px 64px rgba(45,106,79,0.15);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border);
+}
+.header-logo { display: flex; align-items: center; gap: 10px; }
+.header-logo img { width: 36px; height: 36px; object-fit: contain; }
+.header-logo span { color: var(--primary-dark); font-weight: 800; font-size: 18px; }
+
+/* Hero */
+.hero {
+  margin-top: 64px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px 24px;
+  max-width: 600px;
+}
+.hero-mascot { margin-bottom: 32px; }
+.hero-mascot img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.3));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.hero-title h1 {
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: white;
+  margin-bottom: 16px;
+}
+.hero-title h1 span { color: var(--accent); }
+.hero-title p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.hero-cta { margin-top: 36px; }
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: var(--primary-dark);
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(212,165,116,0.35);
+  border: none;
+  cursor: pointer;
+}
+
+/* Steps */
+.steps-section { padding: 80px 20px 60px; }
+.steps-header { text-align: center; margin-bottom: 48px; }
+.steps-header h2 {
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+.steps-header p { font-size: 14px; color: var(--text-muted); max-width: 360px; margin: 0 auto; }
+.steps-container { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--card);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.step-number {
+  min-width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  color: white;
+  flex-shrink: 0;
+}
+.step-content h3 { font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px; }
+.step-content p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.step-icon { font-size: 28px; margin-left: auto; }
+
+/* GEM Card */
+.gem-section { padding: 0 20px 60px; }
+.gem-card {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+  border-radius: 28px;
+  padding: 36px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 640px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+}
+.gem-card-icon { font-size: 48px; flex-shrink: 0; }
+.gem-card-text h3 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px; }
+.gem-card-text p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+/* Poster */
+.poster-section { padding: 60px 20px; background: var(--bg); }
+.poster-header { text-align: center; margin-bottom: 40px; }
+.poster-header h2 { font-size: clamp(22px, 5vw, 32px); font-weight: 800; color: var(--primary-dark); }
+.poster-container {
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 3px solid white;
+}
+.poster-container img { width: 100%; height: auto; display: block; }
+
+/* CTA */
+.cta-section {
+  padding: 100px 20px;
+  background: var(--primary-dark);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.cta-content { position: relative; z-index: 2; max-width: 500px; margin: 0 auto; }
+.cta-mascot { width: 140px; height: 140px; margin: 0 auto 32px; animation: float 4s ease-in-out infinite; }
+.cta-mascot img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 16px 40px rgba(0,0,0,0.3)); }
+.cta-section h2 { color: white; font-size: clamp(26px, 6vw, 36px); font-weight: 800; margin-bottom: 14px; }
+.cta-section p { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 36px; line-height: 1.8; }
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: var(--primary-dark);
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(212,165,116,0.35);
+  border: none;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  background: var(--primary-dark);
+  padding: 40px 20px 32px;
+  text-align: center;
+  position: relative;
+}
+.footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+.footer-logo img { width: 32px; height: 32px; }
+.footer-logo span { color: white; font-weight: 800; font-size: 18px; letter-spacing: 2px; }
+.footer p { color: rgba(255,255,255,0.45); font-size: 12px; line-height: 1.8; }
+.footer-slogan { color: var(--accent) !important; font-weight: 600; margin-top: 10px; font-size: 14px !important; }
+
+/* FAB */
+.fab-wrapper {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.fab-label {
+  background: var(--card);
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.fab {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(45,106,79,0.35);
+  cursor: pointer;
+  border: 3px solid white;
+  text-decoration: none;
+}
+.fab img { width: 44px; height: 44px; object-fit: contain; }
+
+/* Responsive */
+@media (max-width: 400px) {
+  .hero-title h1 { font-size: 26px; }
+  .fab { width: 64px; height: 64px; }
+  .fab img { width: 40px; height: 40px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================ -->
+<!-- PRELOADER                                    -->
+<!-- ============================================ -->
+<div id="preloader">
+  <img src="icon-192.png" alt="GEMPAR">
+  <p>Memuat GEMPAR...</p>
+</div>
+
+<!-- ============================================ -->
+<!-- HEADER                                       -->
+<!-- ============================================ -->
+<header class="header">
+  <div class="header-logo">
+    <img src="icon-192.png" alt="GEMPAR">
+    <span>GEMPAR</span>
+  </div>
+</header>
+
+<!-- ============================================ -->
+<!-- HERO                                         -->
+<!-- ============================================ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-mascot">
+      <img src="images/mascot-cool.png" alt="Maskot GEMPAR">
+    </div>
+    <div class="hero-title">
+      <h1>Gerakan Memilah <span>Sampah</span> Dari Rumah</h1>
+      <p>Pilah sampah dari rumah, dapat GEM, banyak manfaat! Gabung sekarang dan jadilah bagian dari perubahan.</p>
+    </div>
+    <div class="hero-cta">
+      <a href="#" class="hero-btn">🚀 Mulai Sekarang</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- STEPS                                        -->
+<!-- ============================================ -->
+<section class="steps-section">
+  <div class="steps-header">
+    <h2>Cara Kerja GEMPAR</h2>
+    <p>4 langkah mudah untuk memilah sampah dan mendapatkan reward</p>
+  </div>
+  <div class="steps-container">
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Pilah Sampah</h3>
+        <p>Pilah sampah sesuai jenisnya dari rumahmu</p>
+      </div>
+      <div class="step-icon">♻️</div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Bawa ke Drop Point</h3>
+        <p>Bawa sampah yang sudah dipilah ke drop point terdekat</p>
+      </div>
+      <div class="step-icon">📍</div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Tunjukkan QR</h3>
+        <p>Tunjukkan QR Setor ke Petugas Drop Point (PDP)</p>
+      </div>
+      <div class="step-icon">📱</div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Dapatkan GEM</h3>
+        <p>Koin GEM otomatis masuk ke saldomu!</p>
+      </div>
+      <div class="step-icon">💎</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- GEM INFO                                     -->
+<!-- ============================================ -->
+<section class="gem-section">
+  <div class="gem-card">
+    <div class="gem-card-icon">💎</div>
+    <div class="gem-card-text">
+      <h3>Apa itu Koin GEM?</h3>
+      <p>GEM adalah koin kebaikan yang didapat dari setiap setoran sampah. Koin GEM bisa ditukar dengan berbagai reward menarik di aplikasi GEMPAR.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- POSTER                                       -->
+<!-- ============================================ -->
+<section class="poster-section">
+  <div class="poster-header">
+    <h2>Poster GEMPAR</h2>
+  </div>
+  <div class="poster-container">
+    <img src="images/poster.png" alt="Poster GEMPAR">
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CTA                                          -->
+<!-- ============================================ -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="cta-mascot">
+      <img src="images/mascot-reward.png" alt="Maskot Reward">
+    </div>
+    <h2>Siap Bergabung?</h2>
+    <p>Jadilah bagian dari gerakan memilah sampah dari rumah. Bersama-sama kita bisa menciptakan lingkungan yang lebih bersih dan berkelanjutan.</p>
+    <a href="#" class="cta-button">🌟 Gabung Sekarang</a>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FOOTER                                       -->
+<!-- ============================================ -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="icon-192.png" alt="GEMPAR">
+    <span>GEMPAR</span>
+  </div>
+  <p>Gerakan Memilah Sampah Dari Rumah</p>
+  <p class="footer-slogan">Pilah Sampah, Dapat GEM, Banyak Manfaat!</p>
+</footer>
+
+<!-- ============================================ -->
+<!-- FAB                                          -->
+<!-- ============================================ -->
+<div class="fab-wrapper">
+  <div class="fab-label">Chat Admin</div>
+  <a href="#" class="fab">
+    <img src="images/logogempar.png" alt="GEMPAR">
+  </a>
+</div>
+
+<!-- ============================================ -->
+<!-- SCRIPTS                                      -->
+<!-- ============================================ -->
+<script>
+  // Hilangkan preloader setelah load
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('preloader').classList.add('hidden');
+      setTimeout(function() {
+        document.getElementById('preloader').remove();
+      }, 600);
+    }, 1000);
+  });
+
+  // Unregister Service Worker lama & daftarkan yang baru
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs) {
+      regs.forEach(function(reg) {
+        reg.unregister();
+        console.log('Old SW unregistered');
+      });
+    });
+    
+    setTimeout(function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('SW registered:', reg.scope); })
+        .catch(function(err) { console.log('SW failed:', err); });
+    }, 1500);
+  }
+</script>
+
+</body>
+</html>
